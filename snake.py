@@ -15,11 +15,17 @@ class Game:
 
     def join_fes(self):
         for japs in X_POSITION:
-            tom = Turtle(shape="square")
-            tom.penup()
-            tom.color("white")
-            tom.goto(japs)
-            self.all_turtle.append(tom)
+            self.extend(japs)
+
+
+    def extend(self,japs):
+        tom = Turtle(shape="square")
+        tom.penup()
+        tom.color("white")
+        tom.goto(japs)
+        self.all_turtle.append(tom)
+    def snake_extend(self):
+        self.extend(self.all_turtle[-1].position())
 
     def move(self):
         for tor in range(len(self.all_turtle) - 1, 0, -1):

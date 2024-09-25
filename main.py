@@ -31,8 +31,18 @@ while game_on:
     if game.head.distance(food)<15:
         food.refresh()
         score.score_update()
-    if game.head.xcor()>280 or game.head.xcor()<-280 or game.head.ycor()>280 or game.head.ycor<-280:
+        game.snake_extend()
+
+    if game.head.xcor()>290 or game.head.xcor()<-290 or game.head.ycor()>290 or game.head.ycor()<-290:
         game_on=False
+        score.update_over()
+    for square in game.all_turtle:
+         if square==game.head:
+             pass
+         elif game.head.distance(square)<10:
+             game_on=False
+             score.update_over()
+
 
 
 

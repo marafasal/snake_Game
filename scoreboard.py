@@ -1,5 +1,5 @@
 from turtle import Turtle
-
+GAME="GAME OVER"
 class Score(Turtle):
     def __init__(self):
         super().__init__()
@@ -11,6 +11,10 @@ class Score(Turtle):
         self.hideturtle()
     def update(self):
         self.write(f"Score:{self.score}",align="center", font=("Arial",12,"normal"))
+    def update_over(self):
+        self.goto(x=0, y=0)
+        self.write(f"Score:{GAME}", align="center", font=("Arial", 12, "normal"))
+
     def score_update(self):
         self.score += 1
         self.clear()
