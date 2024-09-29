@@ -1,6 +1,6 @@
 import time
 from turtle import  Screen
-from snake import Game
+from snake import Snake
 from food import Food
 from scoreboard import Score
 
@@ -12,37 +12,40 @@ screen.title("snake Game")
 
 
 screen.tracer(0)
-game=Game()
+snake=Snake()
 food=Food()
 score=Score()
 
 screen.listen()
-screen.onkey(game.up,"Up")
-screen.onkey(game.down,"Down")
-screen.onkey(game.right,"Right")
-screen.onkey(game.left,"Left")
+screen.onkey(snake.up, "Up")
+screen.onkey(snake.down, "Down")
+screen.onkey(snake.right, "Right")
+screen.onkey(snake.left, "Left")
 
 game_on=True
 while game_on:
     screen.update()
     time.sleep(0.1)
-    game.move()
+    snake.move()
     #detect a dot
-    if game.head.distance(food)<15:
+    if snake.head.distance(food)<15:
         food.refresh()
         score.score_update()
-        game.snake_extend()
+        snake.snake_extend()
+      #detect the wall and react
+    if snake.head.xcor()>290 or snake.head.xcor()<-290 or snake.head.ycor()>290 or snake.head.ycor()<-290:
 
-    if game.head.xcor()>290 or game.head.xcor()<-290 or game.head.ycor()>290 or game.head.ycor()<-290:
-        game_on=False
-        score.update_over()
-    for square in game.all_turtle[1:]:
+        score.high()
+        snake.reset()
+        #detecting its tail
+    for square in snake.all_turtle[1:]:
         # game.all_turtle[1::]
         #  if square==game.head:
         #      pass
-         if game.head.distance(square)<10:
-             game_on=False
-             score.update_over()
+         if snake.head.distance(square)<10:
+             score.high()
+             snake.reset()
+
 
 
 

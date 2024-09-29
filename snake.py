@@ -5,7 +5,7 @@ DOWN=270
 UP=90
 LEFT=180
 RIGHT=0
-class Game:
+class Snake:
     def __init__(self):
         self.all_turtle=[]
         self.join_fes()
@@ -16,6 +16,12 @@ class Game:
     def join_fes(self):
         for japs in X_POSITION:
             self.extend(japs)
+    def reset(self):
+        for segs in self.all_turtle:
+            segs.goto(1000,1000)
+        self.all_turtle.clear()
+        self.join_fes()
+        self.head = self.all_turtle[0]
 
 
     def extend(self,japs):
